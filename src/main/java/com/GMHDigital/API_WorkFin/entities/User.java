@@ -25,6 +25,8 @@ public class User {
 	
 	private Integer idade;
 	private String profissao;
+	private Integer salarioBruto;
+	private Integer salarioLiquido;
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
 	private Boolean feriasVencidas;
@@ -32,7 +34,7 @@ public class User {
 	public User() {
 	}
 
-	public User(Long id, String nome, String email, Integer idade, String profissao, LocalDate dataInicio,
+	public User(Long id, String nome, String email, Integer idade, String profissao, Integer salarioBruto, Integer salarioLiquido,  LocalDate dataInicio,
 			LocalDate dataFinal, Boolean feriasVencidas) {
 		super();
 		this.id = id;
@@ -40,6 +42,8 @@ public class User {
 		this.email = email;
 		this.idade = idade;
 		this.profissao = profissao;
+		this.salarioBruto = salarioBruto;
+		this.salarioLiquido = salarioLiquido;
 		this.dataInicio = dataInicio;
 		this.dataFinal = dataFinal;
 		this.feriasVencidas = feriasVencidas;
@@ -83,6 +87,23 @@ public class User {
 
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
+	}
+	
+	
+	public Integer getSalarioBruto() {
+		return salarioBruto;
+	}
+
+	public void setSalarioBruto(Integer salarioBruto) {
+		this.salarioBruto = salarioBruto;
+	}
+
+	public Integer getSalarioLiquido() {
+		return salarioLiquido;
+	}
+
+	public void setSalarioLiquido(Integer salarioLiquido) {
+		this.salarioLiquido = salarioLiquido;
 	}
 
 	public LocalDate getDataInicio() {
