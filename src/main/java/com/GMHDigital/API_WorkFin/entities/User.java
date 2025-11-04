@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -31,11 +33,15 @@ public class User {
 	private LocalDate dataFinal;
 	private Boolean feriasVencidas;
 	
+	@OneToOne
+	@JoinColumn(name = "conta_id")
+	private Conta conta;
+	
 	public User() {
 	}
 
 	public User(Long id, String nome, String email, Integer idade, String profissao, Integer salarioBruto, Integer salarioLiquido,  LocalDate dataInicio,
-			LocalDate dataFinal, Boolean feriasVencidas) {
+			LocalDate dataFinal, Boolean feriasVencidas, Conta conta) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -47,6 +53,7 @@ public class User {
 		this.dataInicio = dataInicio;
 		this.dataFinal = dataFinal;
 		this.feriasVencidas = feriasVencidas;
+		this.conta = conta;
 	}
 
 	public Long getId() {
@@ -128,6 +135,15 @@ public class User {
 
 	public void setFeriasVencidas(Boolean feriasVencidas) {
 		this.feriasVencidas = feriasVencidas;
+	}
+	
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 	@Override
