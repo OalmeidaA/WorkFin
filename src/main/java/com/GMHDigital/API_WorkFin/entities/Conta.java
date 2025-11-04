@@ -1,12 +1,16 @@
 package com.GMHDigital.API_WorkFin.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -19,9 +23,11 @@ public class Conta {
 	private Long id;
 	private Integer valorTotal;
 	
-	@OneToOne
-	@JoinColumn(name = "user_id")
+	@OneToOne(mappedBy = "conta", cascade = CascadeType.ALL)
 	private User user;
+	
+	@OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Transacao> transacoes = new ArrayList<>();
 	
 	public Conta() {
 		
@@ -57,6 +63,14 @@ public class Conta {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<Transacao> getTransacoes() {
+		return transacoes;
+	}
+
+	public void setTransacoes(List<Transacao> transacoes) {
+		this.transacoes = transacoes;
 	}
 
 	@Override

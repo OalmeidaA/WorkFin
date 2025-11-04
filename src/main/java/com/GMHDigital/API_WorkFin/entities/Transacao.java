@@ -4,9 +4,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,9 +24,17 @@ public class Transacao {
 	private Integer valor;
 	private LocalDate data;
 	private String descricao;
-	private TipoTransacao tipoTransacao;
-	private Categoria categoria;
 	
+	@Enumerated(EnumType.STRING)
+	private TipoTransacao tipoTransacao;
+	
+	@Enumerated(EnumType.STRING)
+	private Categoria categoria;
+
+	@ManyToOne
+	@JoinColumn(name = "conta_id")
+	private Conta conta;
+
 	public Transacao() {
 		
 	}
@@ -84,6 +96,14 @@ public class Transacao {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	public Conta getContas() {
+		return conta;
+	}
+
+	public void setContas(Conta contas) {
+		this.conta = contas;
 	}
 
 	@Override
