@@ -1,15 +1,18 @@
 package com.GMHDigital.API_WorkFin.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,15 +36,14 @@ public class User {
 	private LocalDate dataFinal;
 	private Boolean feriasVencidas;
 	
-	@OneToOne
-	@JoinColumn(name = "conta_id")
-	private Conta conta;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Transacao> transacoes = new ArrayList<>();
 	
 	public User() {
 	}
 
 	public User(Long id, String nome, String email, Integer idade, String profissao, Integer salarioBruto, Integer salarioLiquido,  LocalDate dataInicio,
-			LocalDate dataFinal, Boolean feriasVencidas, Conta conta) {
+			LocalDate dataFinal, Boolean feriasVencidas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,7 +55,6 @@ public class User {
 		this.dataInicio = dataInicio;
 		this.dataFinal = dataFinal;
 		this.feriasVencidas = feriasVencidas;
-		this.conta = conta;
 	}
 
 	public Long getId() {
@@ -138,12 +139,12 @@ public class User {
 	}
 	
 
-	public Conta getConta() {
-		return conta;
+	public List<Transacao> getTransacoes() {
+		return transacoes;
 	}
 
-	public void setConta(Conta conta) {
-		this.conta = conta;
+	public void setTransacoes(List<Transacao> transacoes) {
+		this.transacoes = transacoes;
 	}
 
 	@Override

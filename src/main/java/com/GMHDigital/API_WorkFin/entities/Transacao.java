@@ -30,10 +30,10 @@ public class Transacao {
 	
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "conta_id")
-	private Conta conta;
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Transacao() {
 		
@@ -96,14 +96,6 @@ public class Transacao {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
-	}
-	
-	public Conta getContas() {
-		return conta;
-	}
-
-	public void setContas(Conta contas) {
-		this.conta = contas;
 	}
 
 	@Override
