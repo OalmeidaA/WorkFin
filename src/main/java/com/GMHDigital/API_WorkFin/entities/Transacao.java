@@ -3,6 +3,8 @@ package com.GMHDigital.API_WorkFin.entities;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.GMHDigital.API_WorkFin.DTO.TransacaoDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -35,10 +37,6 @@ public class Transacao {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	public Transacao() {
-		
-	}
-
 	public Transacao(Long id, Integer valor, LocalDate data, String descricao, TipoTransacao tipoTransacao,
 			Categoria categoria) {
 		super();
@@ -48,6 +46,16 @@ public class Transacao {
 		this.descricao = descricao;
 		this.tipoTransacao = tipoTransacao;
 		this.categoria = categoria;
+	}
+
+	public Transacao(TransacaoDTO dto, User user) {
+		id = dto.getId();
+		valor = dto.getValor();
+		data = dto.getData();
+		descricao = dto.getDescricao();
+		tipoTransacao = dto.getTipoTransacao();
+		categoria = dto.getCategoria();
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -96,6 +104,14 @@ public class Transacao {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
