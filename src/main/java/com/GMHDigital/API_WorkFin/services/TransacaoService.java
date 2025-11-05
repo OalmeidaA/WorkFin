@@ -1,5 +1,8 @@
 package com.GMHDigital.API_WorkFin.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +26,12 @@ public class TransacaoService {
 		Transacao transacao = new Transacao(dto, user);
 		transacaoRepository.save(transacao);
 		return new TransacaoDTO(transacao);
+	}
+	
+
+	public List<TransacaoDTO> findAll() {
+		List<Transacao> list = transacaoRepository.findAll();
+		List<TransacaoDTO> listDTO = list.stream().map(x -> new TransacaoDTO(x)).collect(Collectors.toList());
+		return listDTO;
 	}
 }

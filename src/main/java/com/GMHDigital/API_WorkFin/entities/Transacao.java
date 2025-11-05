@@ -36,6 +36,9 @@ public class Transacao {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	public Transacao() {
+	}
 
 	public Transacao(Long id, Integer valor, LocalDate data, String descricao, TipoTransacao tipoTransacao,
 			Categoria categoria) {
