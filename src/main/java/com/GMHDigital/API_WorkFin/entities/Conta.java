@@ -16,7 +16,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "tb_conta")
+@Table(name = "contas")
 public class Conta {
 
 	@Id

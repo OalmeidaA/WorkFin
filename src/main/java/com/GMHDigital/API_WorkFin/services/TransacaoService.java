@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.GMHDigital.API_WorkFin.DTO.TransacaoDTO;
 import com.GMHDigital.API_WorkFin.entities.Conta;
@@ -15,7 +16,7 @@ import com.GMHDigital.API_WorkFin.repositories.ContaRepository;
 import com.GMHDigital.API_WorkFin.repositories.TransacaoRepository;
 import com.GMHDigital.API_WorkFin.repositories.UserRepository;
 
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class TransacaoService {
@@ -46,7 +47,7 @@ public class TransacaoService {
 		return new TransacaoDTO(transacao);
 	}
 	
-
+	@Transactional(readOnly = true)
 	public List<TransacaoDTO> findAll() {
 		List<Transacao> list = transacaoRepository.findAll();
 		List<TransacaoDTO> listDTO = list.stream().map(x -> new TransacaoDTO(x)).collect(Collectors.toList());
