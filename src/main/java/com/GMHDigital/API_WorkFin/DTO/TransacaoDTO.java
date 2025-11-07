@@ -17,6 +17,7 @@ public class TransacaoDTO {
 	private Categoria categoria;
 
 	private Long userId;
+	private Long contaId;
 	
 	public TransacaoDTO() {
 		
@@ -30,6 +31,7 @@ public class TransacaoDTO {
 		tipoTransacao = entity.getTipoTransacao();
 		categoria = entity.getCategoria();
 		setUserId(entity.getUser().getId());
+		setContaId(entity.getConta().getId());
 	}
 
 	public Long getId() {
@@ -98,6 +100,14 @@ public class TransacaoDTO {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public Long getContaId() {
+		return contaId;
+	}
+
+	public void setContaId(Long contaId) {
+		this.contaId = contaId;
 	}
 	
 	

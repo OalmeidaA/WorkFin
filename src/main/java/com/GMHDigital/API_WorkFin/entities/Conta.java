@@ -13,15 +13,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "tb_conta")
 public class Conta {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private Integer saldoTotal;
+	private int saldoTotal;
 	
 	@OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Transacao> transacoes = new ArrayList<>();
@@ -64,6 +66,14 @@ public class Conta {
 
 	public void setTransacoes(List<Transacao> transacoes) {
 		this.transacoes = transacoes;
+	}
+	
+	public void somaSaldoTotal(int valor) {
+		 this.saldoTotal += valor;
+	}
+	
+	public void subtrairSaldoTotal(int valor) {
+		this.saldoTotal -= valor;
 	}
 
 	@Override

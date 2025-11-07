@@ -55,7 +55,7 @@ public class Transacao {
 		this.categoria = categoria;
 	}
 
-	public Transacao(TransacaoDTO dto, User user) {
+	public Transacao(TransacaoDTO dto, User user, Conta conta) {
 		id = dto.getId();
 		valor = dto.getValor();
 		data = dto.getData();
@@ -63,6 +63,7 @@ public class Transacao {
 		tipoTransacao = dto.getTipoTransacao();
 		categoria = dto.getCategoria();
 		this.user = user;
+		this.conta = conta;
 	}
 
 	public Long getId() {
@@ -119,6 +120,14 @@ public class Transacao {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 	@Override
