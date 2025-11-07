@@ -1,5 +1,8 @@
 package com.GMHDigital.API_WorkFin.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,4 +23,12 @@ public class UserService {
 		userRepository.save(user);
 		return new UserDTO(user);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<UserDTO> findAll(){
+		List<User> userList = userRepository.findAll();
+		List<UserDTO> listDTO = userList.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+		return listDTO;
+	}
+	
 }
