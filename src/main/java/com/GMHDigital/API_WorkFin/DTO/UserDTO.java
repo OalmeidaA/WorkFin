@@ -1,36 +1,14 @@
-package com.GMHDigital.API_WorkFin.entities;
+package com.GMHDigital.API_WorkFin.DTO;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
-import com.GMHDigital.API_WorkFin.DTO.UserDTO;
+import com.GMHDigital.API_WorkFin.entities.User;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "users")
-public class User {
+public class UserDTO {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String nome;
-	
-	@Column(unique = true)
 	private String email;
-	
 	private Integer idade;
 	private String profissao;
 	private Integer salarioBruto;
@@ -38,19 +16,12 @@ public class User {
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
 	private Boolean feriasVencidas;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<Transacao> transacoes = new ArrayList<>();
-	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private Conta conta;
-	
-	
-	public User() {
+
+	public UserDTO() {
 	}
 
-	public User(Long id, String nome, String email, Integer idade, String profissao, Integer salarioBruto, Integer salarioLiquido,  LocalDate dataInicio,
-			LocalDate dataFinal, Boolean feriasVencidas) {
+	public UserDTO(Long id, String nome, String email, Integer idade, String profissao, Integer salarioBruto,
+			Integer salarioLiquido, LocalDate dataInicio, LocalDate dataFinal, Boolean feriasVencidas) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -64,12 +35,12 @@ public class User {
 		this.feriasVencidas = feriasVencidas;
 	}
 	
-	public User(UserDTO dto) {
-		id = dto.getId();
-		nome = dto.getNome();
-		email = dto.getEmail();
-		idade = dto.getIdade();
-		profissao = dto.getProfissao();
+	public UserDTO(User entity) {
+		id = entity.getId();
+		nome = entity.getNome();
+		email = entity.getEmail();
+		idade = entity.getIdade();
+		profissao = entity.getProfissao();
 	}
 
 	public Long getId() {
@@ -111,8 +82,7 @@ public class User {
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
 	}
-	
-	
+
 	public Integer getSalarioBruto() {
 		return salarioBruto;
 	}
@@ -153,30 +123,4 @@ public class User {
 		this.feriasVencidas = feriasVencidas;
 	}
 	
-
-	public List<Transacao> getTransacoes() {
-		return transacoes;
-	}
-
-	public void setTransacoes(List<Transacao> transacoes) {
-		this.transacoes = transacoes;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		return Objects.equals(id, other.id);
-	}
-
 }
