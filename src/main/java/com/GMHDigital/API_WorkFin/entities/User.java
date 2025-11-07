@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -38,6 +39,10 @@ public class User {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Transacao> transacoes = new ArrayList<>();
+	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private Conta conta;
+	
 	
 	public User() {
 	}
