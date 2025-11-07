@@ -37,6 +37,10 @@ public class Transacao {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	@ManyToOne
+	@JoinColumn(name = "conta_id")
+	private Conta conta;
+	
 	public Transacao() {
 	}
 
