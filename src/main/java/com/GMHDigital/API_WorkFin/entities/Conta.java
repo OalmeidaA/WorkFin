@@ -46,7 +46,6 @@ public class Conta {
 	}
 	
 	public Conta(ContaDTO dto, User user) {
-		id = dto.getId();
 		saldoTotal = dto.getSaldoTotal();
 		this.user = user;
 	}

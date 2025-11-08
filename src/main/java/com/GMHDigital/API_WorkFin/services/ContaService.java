@@ -1,5 +1,8 @@
 package com.GMHDigital.API_WorkFin.services;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,5 +30,12 @@ public class ContaService {
 		Conta conta = new Conta(dto, user);
 		contaRepository.save(conta);
 		return new ContaDTO(conta);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<ContaDTO> findAll(){
+		List<Conta> listConta = contaRepository.findAll();
+		List<ContaDTO> listContaDTO = listConta.stream().map(x -> new ContaDTO(x)).collect(Collectors.toList());
+		return listContaDTO;
 	}
 }
