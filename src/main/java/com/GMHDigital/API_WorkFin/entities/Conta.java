@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.GMHDigital.API_WorkFin.DTO.ContaDTO;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -36,12 +38,17 @@ public class Conta {
 	public Conta() {	
 	}
 	
-	
 	public Conta(Long id, Integer saldoTotal, List<Transacao> transacoes) {
 		super();
 		this.id = id;
 		this.saldoTotal = saldoTotal;
 		this.transacoes = transacoes;
+	}
+	
+	public Conta(ContaDTO dto, User user) {
+		id = dto.getId();
+		saldoTotal = dto.getSaldoTotal();
+		this.user = user;
 	}
 
 	public Long getId() {
@@ -68,6 +75,18 @@ public class Conta {
 		this.transacoes = transacoes;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void setSaldoTotal(int saldoTotal) {
+		this.saldoTotal = saldoTotal;
+	}
+
 	public void somaSaldoTotal(int valor) {
 		 this.saldoTotal += valor;
 	}
