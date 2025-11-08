@@ -20,17 +20,17 @@ import com.GMHDigital.API_WorkFin.services.ContaService;
 public class ContaController {
 
 	@Autowired
-	private ContaService contaService;
+	private ContaService service;
 	
 	@PostMapping
 	public ResponseEntity<ContaDTO> insert(@RequestBody ContaDTO dto) {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(contaService.insert(dto));
+		return ResponseEntity.created(uri).body(service.insert(dto));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<ContaDTO>> findAll(){
-		return ResponseEntity.ok().body(contaService.findAll());
+		return ResponseEntity.ok().body(service.findAll());
 	}
 
 }

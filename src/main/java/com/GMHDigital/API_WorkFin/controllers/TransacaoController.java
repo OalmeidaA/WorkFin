@@ -31,7 +31,6 @@ public class TransacaoController {
 	
 	@GetMapping
 	public ResponseEntity<List<TransacaoDTO>> findAll(){
-		List<TransacaoDTO> List = service.findAll();
-		return ResponseEntity.ok().body(List);
+		return ResponseEntity.ok().body(service.findAll());
 	}
 }

@@ -20,18 +20,17 @@ import com.GMHDigital.API_WorkFin.services.UserService;
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private UserService service;
 	
 	@PostMapping
 	public ResponseEntity<UserDTO> insert(@RequestBody UserDTO dto) {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-		return  ResponseEntity.created(uri).body(userService.insert(dto));
+		return  ResponseEntity.created(uri).body(service.insert(dto));
 	}
 	
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll(){
-		List<UserDTO> list = userService.findAll();
-		return ResponseEntity.ok().body(list);
+		return ResponseEntity.ok().body(service.findAll());
 	}
 	
 
