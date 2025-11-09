@@ -38,17 +38,21 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Conta conta;
 	
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private CarteiraTrabalho carteiraTrabalho;
 	
 	public User() {
 	}
 
-	public User(Long id, String nome, String email, Integer idade, String profissao) {
+	public User(Long id, String nome, String email, Integer idade, String profissao, Conta conta, CarteiraTrabalho carteiraTrabalho) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.idade = idade;
 		this.profissao = profissao;
+		this.conta = conta;
+		this.carteiraTrabalho = carteiraTrabalho;
 	}
 	
 	public User(UserDTO dto) {
@@ -105,6 +109,22 @@ public class User {
 
 	public void setTransacoes(List<Transacao> transacoes) {
 		this.transacoes = transacoes;
+	}
+	
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
+
+	public CarteiraTrabalho getCarteiraTrabalho() {
+		return carteiraTrabalho;
+	}
+
+	public void setCarteiraTrabalho(CarteiraTrabalho carteiraTrabalho) {
+		this.carteiraTrabalho = carteiraTrabalho;
 	}
 
 	@Override

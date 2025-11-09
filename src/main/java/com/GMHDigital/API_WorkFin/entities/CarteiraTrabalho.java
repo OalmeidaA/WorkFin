@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,11 +25,18 @@ public class CarteiraTrabalho {
 	private String enderecoResidencia;
 	private String estado;
 	
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	
+	@OneToOne(mappedBy = "carteiraTrabalho")
+	private ContratoTrabalho contratoTrabalho;
+	
 	public CarteiraTrabalho() {
 	}
 
 	public CarteiraTrabalho(Long id, String nome, LocalDate dataNascimento, String email, String enderecoResidencia,
-			String estado) {
+			String estado, User user, ContratoTrabalho contratoTrabalho) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -35,6 +44,8 @@ public class CarteiraTrabalho {
 		this.email = email;
 		this.enderecoResidencia = enderecoResidencia;
 		this.estado = estado;
+		this.user = user;
+		this.contratoTrabalho = contratoTrabalho;
 	}
 
 	public Long getId() {
@@ -83,6 +94,22 @@ public class CarteiraTrabalho {
 
 	public void setEstado(String estado) {
 		this.estado = estado;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public ContratoTrabalho getContratoTrabalho() {
+		return contratoTrabalho;
+	}
+
+	public void setContratoTrabalho(ContratoTrabalho contratoTrabalho) {
+		this.contratoTrabalho = contratoTrabalho;
 	}
 
 	@Override

@@ -9,6 +9,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -36,6 +38,10 @@ public class ContratoTrabalho {
 	@Enumerated(EnumType.STRING)
 	private TipoAdicionais adicionais;
 	
+	@OneToOne
+	@JoinColumn(name = "carteira_trabalho_id")
+	private CarteiraTrabalho carteiraTrabalho;
+	
 
 	public ContratoTrabalho() {
 		
@@ -43,7 +49,7 @@ public class ContratoTrabalho {
 
 	public ContratoTrabalho(Long id, String empresa, String cargo, TipoContrato tipoContrato, Integer salarioBruto,
 			Integer salarioLiquido, LocalDate dataInicio, LocalDate dataFinal, Boolean feriasVencidas,
-			TipoAdicionais adicionais) {
+			TipoAdicionais adicionais, CarteiraTrabalho carteiraTrabalho) {
 		super();
 		this.id = id;
 		this.empresa = empresa;
@@ -55,6 +61,7 @@ public class ContratoTrabalho {
 		this.dataFinal = dataFinal;
 		this.feriasVencidas = feriasVencidas;
 		this.adicionais = adicionais;
+		this.carteiraTrabalho = carteiraTrabalho;
 	}
 
 	public Long getId() {
@@ -135,6 +142,14 @@ public class ContratoTrabalho {
 
 	public void setAdicionais(TipoAdicionais adicionais) {
 		this.adicionais = adicionais;
+	}
+	
+	public CarteiraTrabalho getCarteiraTrabalho() {
+		return carteiraTrabalho;
+	}
+
+	public void setCarteiraTrabalho(CarteiraTrabalho carteiraTrabalho) {
+		this.carteiraTrabalho = carteiraTrabalho;
 	}
 
 	@Override
