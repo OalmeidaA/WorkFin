@@ -3,6 +3,8 @@ package com.GMHDigital.API_WorkFin.entities;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.GMHDigital.API_WorkFin.DTO.CarteiraTrabalhoDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,6 +46,17 @@ public class CarteiraTrabalho {
 		this.email = email;
 		this.enderecoResidencia = enderecoResidencia;
 		this.estado = estado;
+		this.user = user;
+		this.contratoTrabalho = contratoTrabalho;
+	}
+	
+	public CarteiraTrabalho(CarteiraTrabalhoDTO dto, User user, ContratoTrabalho contratoTrabalho) {
+		id = dto.getId();
+		nome = dto.getNome();
+		dataNascimento = dto.getDataNascimento();
+		email = dto.getEmail();
+		enderecoResidencia = dto.getEnderecoResidencia();
+		estado = dto.getEstado();
 		this.user = user;
 		this.contratoTrabalho = contratoTrabalho;
 	}
