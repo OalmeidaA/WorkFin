@@ -16,8 +16,6 @@ import com.GMHDigital.API_WorkFin.repositories.ContaRepository;
 import com.GMHDigital.API_WorkFin.repositories.TransacaoRepository;
 import com.GMHDigital.API_WorkFin.repositories.UserRepository;
 
-
-
 @Service
 public class TransacaoService {
 	
