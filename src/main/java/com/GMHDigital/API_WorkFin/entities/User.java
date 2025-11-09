@@ -1,6 +1,5 @@
 package com.GMHDigital.API_WorkFin.entities;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,14 +29,8 @@ public class User {
 	
 	@Column(unique = true)
 	private String email;
-	
 	private Integer idade;
 	private String profissao;
-	private Integer salarioBruto;
-	private Integer salarioLiquido;
-	private LocalDate dataInicio;
-	private LocalDate dataFinal;
-	private Boolean feriasVencidas;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Transacao> transacoes = new ArrayList<>();
@@ -49,19 +42,13 @@ public class User {
 	public User() {
 	}
 
-	public User(Long id, String nome, String email, Integer idade, String profissao, Integer salarioBruto, Integer salarioLiquido,  LocalDate dataInicio,
-			LocalDate dataFinal, Boolean feriasVencidas) {
+	public User(Long id, String nome, String email, Integer idade, String profissao) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.idade = idade;
 		this.profissao = profissao;
-		this.salarioBruto = salarioBruto;
-		this.salarioLiquido = salarioLiquido;
-		this.dataInicio = dataInicio;
-		this.dataFinal = dataFinal;
-		this.feriasVencidas = feriasVencidas;
 	}
 	
 	public User(UserDTO dto) {
@@ -111,48 +98,6 @@ public class User {
 	public void setProfissao(String profissao) {
 		this.profissao = profissao;
 	}
-	
-	
-	public Integer getSalarioBruto() {
-		return salarioBruto;
-	}
-
-	public void setSalarioBruto(Integer salarioBruto) {
-		this.salarioBruto = salarioBruto;
-	}
-
-	public Integer getSalarioLiquido() {
-		return salarioLiquido;
-	}
-
-	public void setSalarioLiquido(Integer salarioLiquido) {
-		this.salarioLiquido = salarioLiquido;
-	}
-
-	public LocalDate getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(LocalDate dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public LocalDate getDataFinal() {
-		return dataFinal;
-	}
-
-	public void setDataFinal(LocalDate dataFinal) {
-		this.dataFinal = dataFinal;
-	}
-
-	public Boolean getFeriasVencidas() {
-		return feriasVencidas;
-	}
-
-	public void setFeriasVencidas(Boolean feriasVencidas) {
-		this.feriasVencidas = feriasVencidas;
-	}
-	
 
 	public List<Transacao> getTransacoes() {
 		return transacoes;
