@@ -1,15 +1,21 @@
 package com.GMHDigital.API_WorkFin.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.GMHDigital.API_WorkFin.DTO.CarteiraTrabalhoDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -31,14 +37,14 @@ public class CarteiraTrabalho {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToOne(mappedBy = "carteiraTrabalho")
-	private ContratoTrabalho contratoTrabalho;
+	@OneToMany(mappedBy = "carteiraTrabalho", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<ContratoTrabalho> contratos = new ArrayList<>();
 	
 	public CarteiraTrabalho() {
 	}
 
 	public CarteiraTrabalho(Long id, String nome, LocalDate dataNascimento, String email, String enderecoResidencia,
-			String estado, User user, ContratoTrabalho contratoTrabalho) {
+			String estado, User user, List<ContratoTrabalho> contratos ) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -47,10 +53,10 @@ public class CarteiraTrabalho {
 		this.enderecoResidencia = enderecoResidencia;
 		this.estado = estado;
 		this.user = user;
-		this.contratoTrabalho = contratoTrabalho;
+		this.contratos = contratos;
 	}
 	
-	public CarteiraTrabalho(CarteiraTrabalhoDTO dto, User user, ContratoTrabalho contratoTrabalho) {
+	public CarteiraTrabalho(CarteiraTrabalhoDTO dto, User user) {
 		id = dto.getId();
 		nome = dto.getNome();
 		dataNascimento = dto.getDataNascimento();
@@ -58,7 +64,7 @@ public class CarteiraTrabalho {
 		enderecoResidencia = dto.getEnderecoResidencia();
 		estado = dto.getEstado();
 		this.user = user;
-		this.contratoTrabalho = contratoTrabalho;
+		contratos = dto.getContratos().stream().map(x -> new ContratoTrabalho()).collect(Collectors.toList());
 	}
 
 	public Long getId() {
@@ -117,12 +123,12 @@ public class CarteiraTrabalho {
 		this.user = user;
 	}
 	
-	public ContratoTrabalho getContratoTrabalho() {
-		return contratoTrabalho;
+	public List<ContratoTrabalho> getContratos() {
+		return contratos;
 	}
 
-	public void setContratoTrabalho(ContratoTrabalho contratoTrabalho) {
-		this.contratoTrabalho = contratoTrabalho;
+	public void setContratos(List<ContratoTrabalho> contratos) {
+		this.contratos = contratos;
 	}
 
 	@Override

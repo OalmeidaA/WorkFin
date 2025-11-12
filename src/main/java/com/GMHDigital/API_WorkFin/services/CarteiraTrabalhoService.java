@@ -26,7 +26,7 @@ public class CarteiraTrabalhoService {
 	public CarteiraTrabalhoDTO insert(CarteiraTrabalhoDTO dto) {
 
 		User user = userRepository.getReferenceById(dto.getUserId());
-		CarteiraTrabalho carteiraTrabalho = new CarteiraTrabalho(dto, user, null);
+		CarteiraTrabalho carteiraTrabalho = new CarteiraTrabalho(dto, user);
 		carteiraRepository.save(carteiraTrabalho);
 		return new CarteiraTrabalhoDTO(carteiraTrabalho);
 	}

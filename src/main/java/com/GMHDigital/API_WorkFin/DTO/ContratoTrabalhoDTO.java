@@ -1,55 +1,41 @@
-package com.GMHDigital.API_WorkFin.entities;
+package com.GMHDigital.API_WorkFin.DTO;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.GMHDigital.API_WorkFin.entities.ContratoTrabalho;
+import com.GMHDigital.API_WorkFin.entities.TipoAdicionais;
+import com.GMHDigital.API_WorkFin.entities.TipoContrato;
 
-@Entity
-@Table(name = "Contrato_trabalho")
-public class ContratoTrabalho {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+import jakarta.persistence.Column;
+
+public class ContratoTrabalhoDTO {
+
 	private Long id;
-	
+
 	private String empresa;
 	private String cargo;
-	
-	@Enumerated(EnumType.STRING)
 	private TipoContrato tipoContrato;
-	
+
 	private Integer salarioBruto;
 	private Integer salarioLiquido;
-	
+
 	private LocalDate dataInicio;
 	private LocalDate dataFinal;
-	
-	private Boolean feriasVencidas;
-	
-	@Enumerated(EnumType.STRING)
-	private TipoAdicionais adicionais;
-	
-	@ManyToOne
-	@JoinColumn(name = "carteira_trabalho_id")
-	private CarteiraTrabalho carteiraTrabalho;
-	
 
-	public ContratoTrabalho() {
+	private Boolean feriasVencidas;
+
+	private TipoAdicionais adicionais;
+
+	@Column(unique = true)
+	private Long carteiraTrabalhoId;
+	
+	public ContratoTrabalhoDTO() {
 		
 	}
 
-	public ContratoTrabalho(Long id, String empresa, String cargo, TipoContrato tipoContrato, Integer salarioBruto,
+	public ContratoTrabalhoDTO(Long id, String empresa, String cargo, TipoContrato tipoContrato, Integer salarioBruto,
 			Integer salarioLiquido, LocalDate dataInicio, LocalDate dataFinal, Boolean feriasVencidas,
-			TipoAdicionais adicionais, CarteiraTrabalho carteiraTrabalho) {
+			TipoAdicionais adicionais, Long carteiraTrabalhoId) {
 		super();
 		this.id = id;
 		this.empresa = empresa;
@@ -61,7 +47,21 @@ public class ContratoTrabalho {
 		this.dataFinal = dataFinal;
 		this.feriasVencidas = feriasVencidas;
 		this.adicionais = adicionais;
-		this.carteiraTrabalho = carteiraTrabalho;
+		this.carteiraTrabalhoId = carteiraTrabalhoId;
+	}
+	
+	ContratoTrabalhoDTO(ContratoTrabalho entity){
+		id = entity.getId();
+		empresa = entity.getEmpresa();
+		cargo = entity.getCargo();
+		tipoContrato = entity.getTipoContrato();
+		salarioBruto = entity.getSalarioBruto();
+		salarioLiquido = entity.getSalarioLiquido();
+		dataInicio = entity.getDataInicio();
+		dataFinal = entity.getDataFinal();
+		feriasVencidas = entity.getFeriasVencidas();
+		adicionais = entity.getAdicionais();
+		carteiraTrabalhoId = entity.getCarteiraTrabalho().getId();
 	}
 
 	public Long getId() {
@@ -143,30 +143,12 @@ public class ContratoTrabalho {
 	public void setAdicionais(TipoAdicionais adicionais) {
 		this.adicionais = adicionais;
 	}
-	
-	public CarteiraTrabalho getCarteiraTrabalho() {
-		return carteiraTrabalho;
+
+	public Long getCarteiraTrabalhoId() {
+		return carteiraTrabalhoId;
 	}
 
-	public void setCarteiraTrabalho(CarteiraTrabalho carteiraTrabalho) {
-		this.carteiraTrabalho = carteiraTrabalho;
+	public void setCarteiraTrabalhoId(Long carteiraTrabalhoId) {
+		this.carteiraTrabalhoId = carteiraTrabalhoId;
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ContratoTrabalho other = (ContratoTrabalho) obj;
-		return Objects.equals(id, other.id);
-	}
-	
 }

@@ -1,6 +1,9 @@
 package com.GMHDigital.API_WorkFin.DTO;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.GMHDigital.API_WorkFin.entities.CarteiraTrabalho;
 
@@ -19,13 +22,14 @@ public class CarteiraTrabalhoDTO {
 	private String estado;
 	
 	private Long userId;
-	private Long contratoTrabalhoId;
+	
+	private List<ContratoTrabalhoDTO> contratos = new ArrayList<>();
 	
 	public CarteiraTrabalhoDTO() {
 	}
 
 	public CarteiraTrabalhoDTO(Long id, String nome, LocalDate dataNascimento, String email, String enderecoResidencia,
-			String estado, Long userId, Long contratoTrabalhoId) {
+			String estado, Long userId, List<ContratoTrabalhoDTO> contratos) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -34,7 +38,7 @@ public class CarteiraTrabalhoDTO {
 		this.enderecoResidencia = enderecoResidencia;
 		this.estado = estado;
 		this.userId = userId;
-		this.contratoTrabalhoId = contratoTrabalhoId;
+		this.contratos = contratos;
 	}
 	
 	public CarteiraTrabalhoDTO(CarteiraTrabalho entity) {
@@ -46,10 +50,10 @@ public class CarteiraTrabalhoDTO {
 		estado = entity.getEstado();
 		userId = entity.getUser().getId();
 		
-		if(entity.getContratoTrabalho() != null) {
-			this.contratoTrabalhoId = entity.getContratoTrabalho().getId();
+		if(entity.getContratos() != null) {
+			this.contratos = entity.getContratos().stream().map(x -> new ContratoTrabalhoDTO()).collect(Collectors.toList());
 		} else {
-			this.contratoTrabalhoId = null;
+			this.contratos = null;
 		}
 	}
 
@@ -109,12 +113,12 @@ public class CarteiraTrabalhoDTO {
 		this.userId = userId;
 	}
 
-	public Long getContratoTrabalhoId() {
-		return contratoTrabalhoId;
+	public List<ContratoTrabalhoDTO> getContratos() {
+		return contratos;
 	}
 
-	public void setContratoTrabalhoId(Long contratoTrabalhoId) {
-		this.contratoTrabalhoId = contratoTrabalhoId;
+	public void setContratos(List<ContratoTrabalhoDTO> contratos) {
+		this.contratos = contratos;
 	}
 
 }
