@@ -50,7 +50,7 @@ public class ContratoTrabalhoDTO {
 		this.carteiraTrabalhoId = carteiraTrabalhoId;
 	}
 	
-	ContratoTrabalhoDTO(ContratoTrabalho entity){
+	public ContratoTrabalhoDTO(ContratoTrabalho entity){
 		id = entity.getId();
 		empresa = entity.getEmpresa();
 		cargo = entity.getCargo();

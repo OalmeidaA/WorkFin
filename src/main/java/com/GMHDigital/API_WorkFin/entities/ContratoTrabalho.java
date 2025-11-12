@@ -3,6 +3,8 @@ package com.GMHDigital.API_WorkFin.entities;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.GMHDigital.API_WorkFin.DTO.ContratoTrabalhoDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -62,6 +64,19 @@ public class ContratoTrabalho {
 		this.feriasVencidas = feriasVencidas;
 		this.adicionais = adicionais;
 		this.carteiraTrabalho = carteiraTrabalho;
+	}
+	
+	public ContratoTrabalho(ContratoTrabalhoDTO dto, CarteiraTrabalho carteira) {
+		empresa = dto.getEmpresa();
+		cargo = dto.getCargo();
+		tipoContrato = dto.getTipoContrato();
+		salarioBruto = dto.getSalarioBruto();
+		salarioLiquido = dto.getSalarioLiquido();
+		dataInicio = dto.getDataInicio();
+		dataFinal = dto.getDataFinal();
+		feriasVencidas = dto.getFeriasVencidas();
+		adicionais = dto.getAdicionais();
+		this.carteiraTrabalho = carteira;
 	}
 
 	public Long getId() {
