@@ -51,7 +51,7 @@ public class CarteiraTrabalhoDTO {
 		userId = entity.getUser().getId();
 		
 		if(entity.getContratos() != null) {
-			this.contratos = entity.getContratos().stream().map(x -> new ContratoTrabalhoDTO()).collect(Collectors.toList());
+			this.contratos = entity.getContratos().stream().map(x -> new ContratoTrabalhoDTO(x)).collect(Collectors.toList());
 		} else {
 			this.contratos = null;
 		}
