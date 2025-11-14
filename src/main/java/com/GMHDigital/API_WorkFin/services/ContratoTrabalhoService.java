@@ -21,6 +21,7 @@ public class ContratoTrabalhoService {
 	
 	@Autowired
 	private CarteiraTrabalhoRepository carteiraRepository;
+	
 
 	@Transactional
 	public ContratoTrabalhoDTO insert(ContratoTrabalhoDTO dto) {
@@ -29,6 +30,7 @@ public class ContratoTrabalhoService {
 		ContratoTrabalho contrato = new ContratoTrabalho(dto, carteira);
 		contratoRepository.save(contrato);
 		carteira.getContratos().add(contrato);
+		carteiraRepository.save(carteira);
 		return new ContratoTrabalhoDTO(contrato);
 	}
 

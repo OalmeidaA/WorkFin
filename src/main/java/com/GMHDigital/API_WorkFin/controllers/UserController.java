@@ -16,7 +16,7 @@ import com.GMHDigital.API_WorkFin.DTO.UserDTO;
 import com.GMHDigital.API_WorkFin.services.UserService;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/usuarios")
 public class UserController {
 	
 	@Autowired

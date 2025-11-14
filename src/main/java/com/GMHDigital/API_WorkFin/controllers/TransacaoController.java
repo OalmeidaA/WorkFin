@@ -16,7 +16,7 @@ import com.GMHDigital.API_WorkFin.DTO.TransacaoDTO;
 import com.GMHDigital.API_WorkFin.services.TransacaoService;
 
 @RestController
-@RequestMapping(value = "/transacao")
+@RequestMapping(value = "/transacoes")
 public class TransacaoController {
 	
 	@Autowired

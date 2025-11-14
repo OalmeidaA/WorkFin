@@ -16,7 +16,7 @@ import com.GMHDigital.API_WorkFin.DTO.ContaDTO;
 import com.GMHDigital.API_WorkFin.services.ContaService;
 
 @RestController
-@RequestMapping(value = "/conta")
+@RequestMapping(value = "/contas")
 public class ContaController {
 
 	@Autowired

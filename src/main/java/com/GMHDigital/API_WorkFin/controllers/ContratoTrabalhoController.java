@@ -16,7 +16,7 @@ import com.GMHDigital.API_WorkFin.DTO.ContratoTrabalhoDTO;
 import com.GMHDigital.API_WorkFin.services.ContratoTrabalhoService;
 
 @RestController
-@RequestMapping(value = "/ContratoTrabalho")
+@RequestMapping(value = "/contratos")
 public class ContratoTrabalhoController {
 
 	@Autowired

@@ -16,7 +16,7 @@ import com.GMHDigital.API_WorkFin.DTO.CarteiraTrabalhoDTO;
 import com.GMHDigital.API_WorkFin.services.CarteiraTrabalhoService;
 
 @RestController
-@RequestMapping(value = "/CarteiraTrabalho")
+@RequestMapping(value = "/carteiras")
 public class CarteiraTrabalhoController {
 
 	@Autowired
